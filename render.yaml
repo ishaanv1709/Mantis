@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: mantis-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: GROQ_LLM_MODEL
+        value: llama-3.3-70b-versatile
+      - key: GROQ_ASR_MODEL
+        value: whisper-large-v3
+      - key: GROQ_VISION_MODEL
+        value: meta-llama/llama-4-scout-17b-16e-instruct
+      - key: MOSS_PROJECT_ID
+        sync: false
+      - key: MOSS_PROJECT_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: https://mantis-ai.netlify.app
