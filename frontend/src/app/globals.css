@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------
+   Mantis design language, LIGHT, Mobbin-inspired.
+   White ground, near-black text, soft rounded cards, flat (no heavy
+   shadows), yellow #ffff00 as a small STRUCTURAL accent only.
+   Fonts: Figtree (grotesque body/display) + EB Garamond (serif accents).
+---------------------------------------------------------------------- */
+
+:root {
+  --ground: #ffffff;
+  --surface: #fafafa;
+  --surface-2: #f4f4f2;
+  --cream: #fffeeb;
+  --ink: #0f0f0f;
+  --ink-soft: #1a1a1a;
+  --muted: #6b6b66;
+  --muted-2: #8a8a80;
+  --border: #e7e7e2;
+  --border-strong: #d8d8d2;
+  --yellow: #ffe000;
+  --yellow-pure: #ffff00;
+  --radius: 16px;
+}
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-muted-2: var(--muted-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-yellow: var(--yellow);
+  --color-yellow-pure: var(--yellow-pure);
+
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-garamond), Georgia, serif;
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1280px;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Container, Mobbin single column, 1240px max */
+.container-mantis {
+  width: 100%;
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+.display {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+}
+
+.serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.accent-underline {
+  border-bottom: 3px solid var(--yellow-pure);
+  padding-bottom: 1px;
+}
+
+/* Pills (Mobbin) */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pill-dark {
+  background: var(--ink);
+  color: #fff;
+  padding: 0.7rem 1.4rem;
+}
+.pill-dark:hover {
+  transform: translateY(-1px);
+  background: #000;
+}
+.pill-outline {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--border-strong);
+  padding: 0.7rem 1.4rem;
+}
+.pill-outline:hover {
+  border-color: var(--ink);
+}
+
+.card-soft {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+/* Marquee */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-rev {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee-track.reverse {
+  animation: marquee-rev 40s linear infinite;
+}
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-pause:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+/* Floating decorative elements */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+.floaty { animation: floaty 6s ease-in-out infinite; }
+.floaty-2 { animation: floaty 7.5s ease-in-out infinite; }
+.floaty-3 { animation: floaty 9s ease-in-out infinite; }
+
+/* Soft radial blobs for hero background — now alive */
+@keyframes blob-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(24px, -28px) scale(1.08); }
+  66% { transform: translate(-20px, 18px) scale(0.95); }
+}
+.blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.7;
+  z-index: -1;
+  animation: blob-drift 18s ease-in-out infinite;
+  mix-blend-mode: multiply;
+}
+.blob.b2 { animation-duration: 22s; animation-delay: -4s; }
+.blob.b3 { animation-duration: 26s; animation-delay: -9s; }
+
+/* ---------------- Premium "level up" utilities ---------------- */
+
+/* Vivid gradient text */
+.text-gradient {
+  background: linear-gradient(100deg, #6d28d9 0%, #db2777 35%, #f59e0b 70%, #16a34a 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: hue 8s ease infinite;
+}
+@keyframes hue {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Aurora moving background for feature sections */
+.aurora {
+  position: absolute;
+  inset: -20%;
+  z-index: -1;
+  background:
+    radial-gradient(40% 40% at 20% 30%, rgba(124, 58, 237, 0.18), transparent 70%),
+    radial-gradient(35% 35% at 80% 20%, rgba(245, 158, 11, 0.20), transparent 70%),
+    radial-gradient(45% 45% at 60% 80%, rgba(22, 163, 74, 0.16), transparent 70%),
+    radial-gradient(40% 40% at 30% 75%, rgba(219, 39, 119, 0.16), transparent 70%);
+  filter: blur(40px);
+  animation: blob-drift 24s ease-in-out infinite;
+}
+
+/* Subtle grain overlay */
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+/* Dotted grid background */
+.dotgrid {
+  background-image: radial-gradient(var(--border-strong) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Glows */
+.glow-ring { box-shadow: 0 0 0 1px var(--border), 0 18px 50px -20px rgba(124, 58, 237, 0.35); }
+.glow-soft { box-shadow: 0 20px 60px -24px rgba(0, 0, 0, 0.25); }
+
+/* Shimmer sweep on hover for cards */
+.shine { position: relative; overflow: hidden; }
+.shine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.shine:hover::before { transform: translateX(120%); }
+
+/* Animated gradient ring border */
+.ring-gradient {
+  position: relative;
+  border-radius: var(--radius);
+  background: #fff;
+}
+.ring-gradient::before {
+  content: "";
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: linear-gradient(120deg, #7c3aed, #db2777, #f59e0b, #16a34a);
+  background-size: 300% 300%;
+  z-index: -1;
+  animation: hue 6s ease infinite;
+}
+
+/* Vertical marquee for moving phone screens */
+@keyframes marquee-y {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+@keyframes marquee-y-rev {
+  from { transform: translateY(-50%); }
+  to { transform: translateY(0); }
+}
+.marquee-col { animation: marquee-y 28s linear infinite; }
+.marquee-col.reverse { animation: marquee-y-rev 34s linear infinite; }
+.marquee-mask-y {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+}
+
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
