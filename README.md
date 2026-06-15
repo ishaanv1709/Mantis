@@ -25,31 +25,69 @@
 
 </div>
 
-## Overview
+## 🌟 Overview
 
-Mantis is an intelligent platform where companies can list their products and users can quickly find answers to product-related questions and issues. Instead of a simple search engine, Mantis provides a diagnostic assistant that systematically helps users troubleshoot problems using official manufacturer-provided information.
+**Mantis** is an intelligent, unified platform designed to bridge the gap between complex product manuals and everyday users. Instead of sifting through hundreds of PDF pages or watching hours of scattered YouTube videos, users can talk to an AI-powered technician specifically trained on the manufacturer's official documentation.
 
-## Key Features
+What makes Mantis special isn't just its search capability—it's the **systematic, diagnostic reasoning**. Just like a real technician, the Mantis Assistant asks clarifying questions to eliminate unlikely causes, guides users through safe inspection steps, and provides cited, step-by-step corrective actions.
 
-- **Product Marketplace:** A searchable catalog of products.
-- **Knowledge Repository:** Product manuals, documents, and videos accessible in one place.
-- **Intelligent Diagnostic Assistant:** An AI-powered assistant that acts like an experienced technician, diagnosing issues step-by-step.
-- **Personalized Dashboard:** Users can track the products they own and view maintenance schedules.
-- **Community Threads:** Discuss products and get help from other owners.
+## ✨ What Makes Mantis Special?
 
-## Application Flow
+### 🛠️ Intelligent Diagnostic Assistant
+Traditional chatbots just dump search results. Mantis acts as a virtual repair technician. If a user says "my scooter horn is broken", the assistant doesn't just list twenty possible causes. It asks targeted follow-up questions (e.g., "Does the headlight work? Did the issue start suddenly?") to narrow down the exact failure point before providing a solution, complete with safety warnings and difficulty scores.
 
-Here is the complete user and system flow for Mantis:
+### 🧠 Hybrid Architecture (Avoiding MOSS Limits)
+During the hackathon, we encountered rate limits and token constraints with the MOSS API. To solve this, we designed a **Hybrid Reasoning Architecture**:
+- **MOSS API** is used strictly as a highly-specialized retrieval engine. It vectorizes manuals and intelligently fetches relevant chunks (symptoms, procedures, error codes, and warnings).
+- **Groq (Llama-3.3-70b)** takes over the heavy lifting of generative reasoning. It triages user intents, formulates queries, and synthesizes the final conversational response.
 
-![Mantis Full Flow](Flow.png)
+This decoupled approach allows us to deliver blazing-fast responses while completely avoiding MOSS token limits!
 
-## Backend Architecture
+### 🔒 Secure Auth via Clerk
+User authentication, sign-ups, and sessions are fully secured using **Clerk**. Whether it's a company uploading a product or a user registering their appliances, data is handled securely and effortlessly.
 
-The intelligence of Mantis is powered by an advanced architecture integrating MOSS for agentic reasoning:
+### 🛒 Product Marketplace & Dashboard
+Companies can register and list their products, complete with manuals and images. Users get a personalized dashboard where they can "own" products, track maintenance schedules, and access all relevant information instantly.
 
-![Backend Architecture](Backend%20Architecture.png)
+### ⭐ Reviews & Ratings
+Users can rate products and leave detailed reviews, building a trusted ecosystem for prospective buyers to evaluate appliances and electronics.
 
-## Getting Started
+### 💬 Community Threads
+Every product has dedicated community threads. Users can start discussions, share their own DIY fixes, ask questions to other owners, and upvote helpful solutions.
+
+---
+
+## 🗺️ Application Flow
+
+Here is how data and users flow through Mantis:
+
+<div align="center">
+  <img src="Flow.png" alt="Mantis Full Flow" width="800"/>
+</div>
+
+## 🏗️ Backend Architecture
+
+Our backend separates triage, retrieval, and reasoning to ensure speed and accuracy:
+
+<div align="center">
+  <img src="Backend%20Architecture.png" alt="Backend Architecture" width="800"/>
+</div>
+
+## 💻 Tech Stack
+
+- **Frontend:** Next.js 15, React, TailwindCSS, Clerk (Auth)
+- **Backend:** FastAPI (Python), Groq (Llama-3.3), MOSS API
+- **Database:** Prisma ORM with SQLite
+- **Design:** Excalidraw, Radix UI
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js & npm
+- Python 3.10+
+- Clerk API Keys
+- Groq API Key
+- MOSS API Key
 
 ### Frontend Setup
 
@@ -66,6 +104,12 @@ npm run dev
 cd backend
 python -m venv .venv
 # Activate venv
+# Windows: .venv\Scripts\activate | Mac/Linux: source .venv/bin/activate
 pip install -r requirements.txt
 python -m app.main
 ```
+
+<div align="center">
+<br/>
+<em>Built with passion in 24 hours.</em>
+</div>
