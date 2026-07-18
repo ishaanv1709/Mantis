@@ -63,6 +63,10 @@ Every product has dedicated community threads. Users can start discussions, shar
   <img src="screenshots/product-page-demo.png" alt="A technician in every product page" width="800"/>
   <br/><br/>
   <img src="screenshots/brands-section.png" alt="Works with the brands you own" width="800"/>
+  <br/><br/>
+  <img src="screenshots/assistant-page.png" alt="AI Assistant chat" width="800"/>
+  <br/><br/>
+  <img src="screenshots/threads-page.png" alt="Community threads" width="800"/>
 </div>
 
 ## Application Flow
